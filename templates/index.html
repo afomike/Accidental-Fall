@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accidental Fall Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Accidental Fall Prediction and Detection</h1>
+        <form id="predictionForm" action="/predict" method="post">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="phone">Caretaker's Phone Number:</label>
+            <input type="text" id="phone" name="phone" required>
+
+            <label for="distance">Distance:</label>
+            <input type="text" id="distance" name="distance" required>
+
+            <label for="pressure">Pressure:</label>
+            <input type="text" id="pressure" name="pressure" required>
+
+            <label for="heart_rate">Heart Rate:</label>
+            <input type="text" id="heart_rate" name="heart_rate" required>
+
+            <label for="sugar_level">Sugar Level:</label>
+            <input type="text" id="sugar_level" name="sugar_level" required>
+
+            <label for="spo2_levels">SpO2 Levels:</label>
+            <input type="text" id="spo2_levels" name="spo2_levels" required>
+
+            <label for="accelerometer">Accelerometer:</label>
+            <input type="text" id="accelerometer" name="accelerometer" required>
+
+            <button type="submit">Predict</button>
+        </form>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        document.getElementById('predictionForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData.entries());
+
+            const response = await fetch('/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+
+            const result = await response.json();
+            document.getElementById('result').innerText = result.message;
+        });
+    </script>
+</body>
+</html>

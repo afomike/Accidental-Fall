@@ -25,7 +25,7 @@
 <body>
     <div class="container">
         <h1>Accidental Fall Prediction and Detection</h1>
-        <p>Please provide the details below. Ensure the values are accurate for better predictions.</p>
+        <p>Please input the required details. The values should match the sample format for accurate predictions.</p>
         <form id="predictionForm" action="/predict" method="post">
             <label for="name">Name (e.g., John Doe):</label>
             <input type="text" id="name" name="name" placeholder="Enter your full name" required>
@@ -33,23 +33,23 @@
             <label for="phone">Caretaker's Phone Number (e.g., 123-456-7890):</label>
             <input type="text" id="phone" name="phone" placeholder="Enter caretaker's phone number" required>
 
-            <label for="distance">Distance (e.g., 5.4 meters):</label>
+            <label for="distance">Distance (e.g., 25.540):</label>
             <input type="text" id="distance" name="distance" placeholder="Enter distance in meters" required>
 
-            <label for="pressure">Pressure (e.g., 120 mmHg):</label>
-            <input type="text" id="pressure" name="pressure" placeholder="Enter pressure in mmHg" required>
+            <label for="pressure">Pressure (e.g., 1 for normal, 0 for abnormal):</label>
+            <input type="text" id="pressure" name="pressure" placeholder="Enter 1 for normal, 0 for abnormal" required>
 
-            <label for="heart_rate">Heart Rate (e.g., 75 bpm):</label>
-            <input type="text" id="heart_rate" name="heart_rate" placeholder="Enter heart rate in bpm" required>
+            <label for="heart_rate">HRV - Heart Rate Variability (e.g., 101.396):</label>
+            <input type="text" id="heart_rate" name="heart_rate" placeholder="Enter HRV value" required>
 
-            <label for="sugar_level">Sugar Level (e.g., 90 mg/dL):</label>
+            <label for="sugar_level">Sugar Level (e.g., 61.080):</label>
             <input type="text" id="sugar_level" name="sugar_level" placeholder="Enter sugar level in mg/dL" required>
 
-            <label for="spo2_levels">SpO2 Levels (e.g., 95%):</label>
+            <label for="spo2_levels">SpO2 Levels (e.g., 87.770):</label>
             <input type="text" id="spo2_levels" name="spo2_levels" placeholder="Enter SpO2 level in percentage" required>
 
-            <label for="accelerometer">Accelerometer Data (e.g., x=0.02, y=0.15, z=-0.10):</label>
-            <input type="text" id="accelerometer" name="accelerometer" placeholder="Enter accelerometer data" required>
+            <label for="accelerometer">Accelerometer Data (e.g., 1 for movement, 0 for no movement):</label>
+            <input type="text" id="accelerometer" name="accelerometer" placeholder="Enter 1 for movement, 0 for no movement" required>
 
             <button type="submit">Predict</button>
         </form>

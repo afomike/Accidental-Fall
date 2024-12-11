@@ -5,37 +5,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accidental Fall Prediction</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .loading-spinner {
+            display: none;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 10px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
         <h1>Accidental Fall Prediction and Detection</h1>
+        <p>Please provide the details below. Ensure the values are accurate for better predictions.</p>
         <form id="predictionForm" action="/predict" method="post">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
+            <label for="name">Name (e.g., John Doe):</label>
+            <input type="text" id="name" name="name" placeholder="Enter your full name" required>
 
-            <label for="phone">Caretaker's Phone Number:</label>
-            <input type="text" id="phone" name="phone" required>
+            <label for="phone">Caretaker's Phone Number (e.g., 123-456-7890):</label>
+            <input type="text" id="phone" name="phone" placeholder="Enter caretaker's phone number" required>
 
-            <label for="distance">Distance:</label>
-            <input type="text" id="distance" name="distance" required>
+            <label for="distance">Distance (e.g., 5.4 meters):</label>
+            <input type="text" id="distance" name="distance" placeholder="Enter distance in meters" required>
 
-            <label for="pressure">Pressure:</label>
-            <input type="text" id="pressure" name="pressure" required>
+            <label for="pressure">Pressure (e.g., 120 mmHg):</label>
+            <input type="text" id="pressure" name="pressure" placeholder="Enter pressure in mmHg" required>
 
-            <label for="heart_rate">Heart Rate:</label>
-            <input type="text" id="heart_rate" name="heart_rate" required>
+            <label for="heart_rate">Heart Rate (e.g., 75 bpm):</label>
+            <input type="text" id="heart_rate" name="heart_rate" placeholder="Enter heart rate in bpm" required>
 
-            <label for="sugar_level">Sugar Level:</label>
-            <input type="text" id="sugar_level" name="sugar_level" required>
+            <label for="sugar_level">Sugar Level (e.g., 90 mg/dL):</label>
+            <input type="text" id="sugar_level" name="sugar_level" placeholder="Enter sugar level in mg/dL" required>
 
-            <label for="spo2_levels">SpO2 Levels:</label>
-            <input type="text" id="spo2_levels" name="spo2_levels" required>
+            <label for="spo2_levels">SpO2 Levels (e.g., 95%):</label>
+            <input type="text" id="spo2_levels" name="spo2_levels" placeholder="Enter SpO2 level in percentage" required>
 
-            <label for="accelerometer">Accelerometer:</label>
-            <input type="text" id="accelerometer" name="accelerometer" required>
+            <label for="accelerometer">Accelerometer Data (e.g., x=0.02, y=0.15, z=-0.10):</label>
+            <input type="text" id="accelerometer" name="accelerometer" placeholder="Enter accelerometer data" required>
 
             <button type="submit">Predict</button>
         </form>
+        <div class="loading-spinner" id="loadingSpinner"></div>
         <div id="result"></div>
     </div>
 
@@ -43,19 +61,33 @@
         document.getElementById('predictionForm').addEventListener('submit', async (e) => {
             e.preventDefault();
 
+            const loadingSpinner = document.getElementById('loadingSpinner');
+            const resultDiv = document.getElementById('result');
+
+            // Show the loading spinner
+            loadingSpinner.style.display = 'block';
+            resultDiv.innerText = '';
+
             const formData = new FormData(e.target);
             const data = Object.fromEntries(formData.entries());
 
-            const response = await fetch('/predict', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            });
+            try {
+                const response = await fetch('/predict', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                });
 
-            const result = await response.json();
-            document.getElementById('result').innerText = result.message;
+                const result = await response.json();
+                resultDiv.innerText = result.message;
+            } catch (error) {
+                resultDiv.innerText = 'Error: Unable to process the request.';
+            } finally {
+                // Hide the loading spinner
+                loadingSpinner.style.display = 'none';
+            }
         });
     </script>
 </body>

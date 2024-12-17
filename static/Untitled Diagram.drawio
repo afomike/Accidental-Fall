@@ -74,6 +74,24 @@
             <mxPoint x="966.06" y="385.34000000000003" as="sourcePoint" />
           </mxGeometry>
         </mxCell>
+        <mxCell id="kQwfvUEjWwnIHG5cwfoE-1" value="" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+          <mxGeometry x="110" y="150" width="90" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="kQwfvUEjWwnIHG5cwfoE-8" value="" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="70" y="310" width="250" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="kQwfvUEjWwnIHG5cwfoE-10" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="90" y="370" width="210" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="kQwfvUEjWwnIHG5cwfoE-11" value="Text" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="395" y="225" width="110" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="kQwfvUEjWwnIHG5cwfoE-12" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="90" y="490" width="210" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="kQwfvUEjWwnIHG5cwfoE-13" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="90" y="430" width="210" height="50" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>

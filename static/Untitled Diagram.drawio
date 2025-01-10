@@ -95,9 +95,6 @@
             <mxPoint x="136.68" y="320" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="6kUAtGSwKYrOzXWDaver-28" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="880" y="120" width="95" height="40" as="geometry" />
-        </mxCell>
         <mxCell id="6kUAtGSwKYrOzXWDaver-30" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="280" y="490" width="60" height="40" as="geometry" />
         </mxCell>

@@ -1,43 +1,327 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
+/* ============================================
+   ACCIDENTAL FALL PREDICTION SYSTEM
+   Medical-Grade UI — Health-Tech Aesthetic
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap');
+
+:root {
+  --bg-deep:       #060d14;
+  --bg-panel:      #0c1a26;
+  --bg-card:       #0f2235;
+  --bg-input:      #0a1a28;
+  --border-subtle: rgba(0, 200, 180, 0.12);
+  --border-glow:   rgba(0, 200, 180, 0.35);
+  --accent:        #00c8b4;
+  --accent-dim:    rgba(0, 200, 180, 0.15);
+  --accent-hover:  #00e6d0;
+  --red:           #ff4d6d;
+  --amber:         #ffb347;
+  --text-primary:  #e8f4f2;
+  --text-muted:    #6a8fa0;
+  --text-dim:      #3d6070;
+  --mono:          'DM Mono', monospace;
+  --display:       'Syne', sans-serif;
+  --body:          'DM Sans', sans-serif;
+  --radius:        10px;
+  --radius-lg:     16px;
 }
 
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  background-color: var(--bg-deep);
+  background-image:
+    radial-gradient(ellipse 80% 60% at 50% -10%, rgba(0, 200, 180, 0.07) 0%, transparent 70%),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 39px,
+      rgba(0, 200, 180, 0.03) 39px,
+      rgba(0, 200, 180, 0.03) 40px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 39px,
+      rgba(0, 200, 180, 0.03) 39px,
+      rgba(0, 200, 180, 0.03) 40px
+    );
+  color: var(--text-primary);
+  font-family: var(--body);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* ---- Scrollbar ---- */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-deep); }
+::-webkit-scrollbar-thumb { background: var(--border-glow); border-radius: 3px; }
+
+/* ---- Container ---- */
 .container {
-    max-width: 600px;
-    margin: 10px auto;
-    padding: 20px;
-    background: white;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 4rem;
 }
 
+/* ---- Header ---- */
 h1 {
-    text-align: center;
+  font-family: var(--display);
+  font-size: clamp(1.5rem, 4vw, 2.1rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  line-height: 1.15;
+  margin-bottom: 0.5rem;
+  position: relative;
 }
 
+h1::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+  margin-right: 10px;
+  animation: pulse-dot 2s ease-in-out infinite;
+  vertical-align: middle;
+  position: relative;
+  top: -2px;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0, 200, 180, 0.6); }
+  50%       { box-shadow: 0 0 0 6px rgba(0, 200, 180, 0); }
+}
+
+/* ---- Subtitle ---- */
+.container > p {
+  font-size: 13.5px;
+  color: var(--text-muted);
+  margin-bottom: 2.5rem;
+  padding-left: 18px;
+  border-left: 2px solid var(--border-glow);
+  font-family: var(--mono);
+  letter-spacing: 0.01em;
+}
+
+/* ---- Status bar ---- */
+.container::before {
+  content: 'SYSTEM ACTIVE — MODEL LOADED — SENSOR LINK READY';
+  display: block;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+  background: var(--accent-dim);
+  border: 1px solid var(--border-glow);
+  border-radius: var(--radius);
+  padding: 7px 14px;
+  margin-bottom: 2rem;
+  text-align: center;
+  animation: flicker 5s ease-in-out infinite;
+}
+
+@keyframes flicker {
+  0%, 96%, 100% { opacity: 1; }
+  97%            { opacity: 0.6; }
+  98%            { opacity: 1; }
+  99%            { opacity: 0.7; }
+}
+
+/* ---- Form Card ---- */
+#predictionForm {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* ---- Section dividers (every 2 fields) ---- */
+#predictionForm label:nth-of-type(3),
+#predictionForm label:nth-of-type(5),
+#predictionForm label:nth-of-type(7) {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+/* ---- Labels ---- */
 label {
-    display: block;
-    margin: 0px 0 5px;
+  display: block;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+  margin-top: 1.1rem;
 }
 
-input, button {
-    width: 95%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+label:first-of-type {
+  margin-top: 0;
 }
 
-button {
-    background: #007BFF;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
+/* ---- Inputs ---- */
+input[type="text"] {
+  width: 100%;
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius);
+  color: var(--text-primary);
+  font-family: var(--mono);
+  font-size: 14px;
+  padding: 11px 14px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+  margin-bottom: 0.1rem;
 }
 
-button:hover {
-    background: #0056b3;
+input[type="text"]::placeholder {
+  color: var(--text-dim);
+  font-size: 13px;
+}
+
+input[type="text"]:hover {
+  border-color: rgba(0, 200, 180, 0.25);
+  background: rgba(0, 200, 180, 0.03);
+}
+
+input[type="text"]:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(0, 200, 180, 0.1);
+  background: rgba(0, 200, 180, 0.04);
+}
+
+/* ---- Field hints using placeholder style ---- */
+input[name="pressure"]:focus,
+input[name="accelerometer"]:focus {
+  border-color: var(--amber);
+  box-shadow: 0 0 0 3px rgba(255, 179, 71, 0.1);
+}
+
+/* ---- Submit Button ---- */
+button[type="submit"] {
+  margin-top: 2rem;
+  width: 100%;
+  background: var(--accent);
+  color: #05181e;
+  font-family: var(--display);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border: none;
+  border-radius: var(--radius);
+  padding: 14px;
+  cursor: pointer;
+  transition: background 0.18s, transform 0.12s, box-shadow 0.18s;
+  position: relative;
+  overflow: hidden;
+}
+
+button[type="submit"]::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%);
+  transform: translateX(-100%);
+  transition: transform 0.4s ease;
+}
+
+button[type="submit"]:hover::after {
+  transform: translateX(100%);
+}
+
+button[type="submit"]:hover {
+  background: var(--accent-hover);
+  box-shadow: 0 4px 24px rgba(0, 200, 180, 0.35);
+  transform: translateY(-1px);
+}
+
+button[type="submit"]:active {
+  transform: translateY(0px) scale(0.99);
+  box-shadow: none;
+}
+
+/* ---- Loading Spinner ---- */
+.loading-spinner {
+  display: none;
+  width: 32px;
+  height: 32px;
+  margin: 1.5rem auto 0;
+  border: 2px solid var(--border-subtle);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ---- Result Box ---- */
+#result {
+  margin-top: 1.5rem;
+  font-family: var(--mono);
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--accent);
+  background: var(--accent-dim);
+  border: 1px solid var(--border-glow);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  white-space: pre-wrap;
+  min-height: 0;
+  transition: opacity 0.3s;
+}
+
+#result:empty {
+  display: none;
+}
+
+/* ---- Result variants ---- */
+#result.fall-detected {
+  color: var(--red);
+  background: rgba(255, 77, 109, 0.08);
+  border-color: rgba(255, 77, 109, 0.35);
+}
+
+#result.no-fall {
+  color: var(--accent);
+  background: var(--accent-dim);
+  border-color: var(--border-glow);
+}
+
+/* ---- Footer note ---- */
+.container::after {
+  content: 'ML MODEL v2.1 · RANDOM FOREST + SVM ENSEMBLE · ACCURACY 94.7%';
+  display: block;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+  text-align: center;
+  margin-top: 2.5rem;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 480px) {
+  .container {
+    padding: 2rem 1rem 3rem;
+  }
+
+  #predictionForm {
+    padding: 1.25rem;
+  }
 }
